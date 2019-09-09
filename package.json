@@ -2,6 +2,7 @@
   "name": "mern",
   "version": "1.0.0",
   "description": "Mern Demo",
+  "proxy": "http://localhost:3001/",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -12,7 +13,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "",
+  "author": "Robbi Walls",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",
@@ -20,11 +21,15 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "brace": "^0.11.1",
     "braces": "^3.0.2",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
     "mem": "^5.1.1",
-    "mongoose": "^5.6.13"
+    "mongoose": "^5.6.13",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "^3.1.1"
   }
 }
