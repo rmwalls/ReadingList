@@ -1,7 +1,3 @@
-// import React from "react";
-// import Books from "./pages/Books";
-// import Nav from "./components/Nav";
-
 // function App() {
 //   return (
 //     <div>
@@ -17,11 +13,11 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Books from "./pages/Books";
 import BookDetail from "./pages/Books";
-import NoMatch from "./pages/NoMatch";
+// import NoMatch from "./pages/NoMatch";
 import SearchBooks from "./pages/SearchBooks";
 import Navbar from "./components/Nav";
 //import Footer from "./components/Footer";
-import Wrapper from "./components/Wrapper";
+import Wrapper from "./components/Wrapper"; 
 
 function App() {
   return (
@@ -32,7 +28,7 @@ function App() {
           <Route exact path="/" component={Books} />
           <Route exact path="/bookdetail" component={BookDetail} />
           <Route exact path="/searchbooks" component={SearchBooks} />
-          <Route exact path="/nomatch" component={NoMatch} />
+          {/* <Route exact path="/nomatch" component={NoMatch} /> */}
         </Wrapper>
       </div>
     </Router>
@@ -40,4 +36,3 @@ function App() {
 }
 
 export default App;
-

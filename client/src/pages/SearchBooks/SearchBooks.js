@@ -3,8 +3,7 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 //import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
-//import SearchForm from '../components/SearchForm';
+import { Input, FormBtn } from "../../components/Form";
 //import BookCard from '../components/BookCard';
 
 // Function to format the book results as they are returned from the API.  Allows for a single component 'BookCard'
@@ -13,7 +12,6 @@ const formatBookResults = axiosApiResults => {
   const bookArray = [];
 
   axiosApiResults.map(book => {
-
     const formattedBook = {
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors
@@ -26,13 +24,12 @@ const formatBookResults = axiosApiResults => {
         : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/170px-No_image_available.svg.png',
       link: book.volumeInfo.canonicalVolumeLink,
     };
-
+    console.log("formattedBook " + formattedBook);
     bookArray.push(formattedBook);
     return bookArray
   });
   return bookArray;
 };
-
 
 class SearchBooks extends Component {
   state = {
@@ -44,7 +41,6 @@ class SearchBooks extends Component {
     error: ""
   };
 
-
   // When the component mounts, get list of books
   // componentDidMount() {
   //   API.getBooks()
@@ -54,9 +50,17 @@ class SearchBooks extends Component {
 
 
 // handle input change
-handleInputChange = event => {
-  this.setState({search: event.target.value})
-};
+// handleInputChange = event => {
+//   this.setState({search: event.target.value})
+// };
+
+ // Handles updating component state when the user types into the input field
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
 // On Submit, retrieve results
 // from Axios/Google Books API.
@@ -81,18 +85,18 @@ handleFormSubmit = event => {
         author: this.state.author,
         synopsis: this.state.synopsis
       })
-        .then(res => this.loadBooks())
+        .then(result => this.loadBooks())
         .catch(err => console.log(err));
     }
   };
 
   render() {
     return (
-      <Container fluid>
+      <Container>
         <Row>
-          <Col size="md-6">
+          <Col size="md-8">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>Let's Find A Book!</h1>
             </Jumbotron>
             <form>
               <Input
@@ -105,23 +109,18 @@ handleFormSubmit = event => {
                 value={this.state.author}
                 onChange={this.handleInputChange}
                 name="author"
-                placeholder="Author (required)"
-              />
-              <TextArea
-                value={this.state.synopsis}
-                onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
+                placeholder="Author (optional)"
               />
               <FormBtn
                 disabled={!(this.state.author && this.state.title)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Search
               </FormBtn>
             </form>
           </Col>
         </Row>
-      </Container>)}}  
+      </Container>
+      )}}  
 
 export default SearchBooks;      
